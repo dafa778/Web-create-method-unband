@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DAFAMODS – MT BANNED DAN UNBANNED (MT Razor)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0b1220; 
+      --bg2:#0f1a2e;
+      --card:#0f1a2e80;
+      --accent:#ff3b3b;
+      --accent-900:#c72b2b;
+      --text:#e8eefc;
+      --muted:#9bb0d0;
+      --ring:#2e91ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--text);
+      background: radial-gradient(1200px 800px at 10% 10%, #182744 0%, transparent 60%),
+                  radial-gradient(1000px 700px at 90% 20%, #2a0b3a 0%, transparent 60%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+    .neon{position:fixed; inset:-20vmax; pointer-events:none; filter:blur(6px) saturate(160%); opacity:.35}
+    .neon::before, .neon::after{
+      content:""; position:absolute; inset:0; background: conic-gradient(from 0deg at 50% 50%,
+        #00e6ff 0deg, transparent 60deg, #00ffa3 120deg, transparent 180deg, #ff3b3b 240deg, transparent 300deg, #8a6cff 360deg);
+      mix-blend-mode:screen; animation:spin 22s linear infinite;
+    }
+    .neon::after{ animation-direction:reverse; animation-duration:34s; opacity:.6 }
+    @keyframes spin{to{transform:rotate(1turn)}}.wrap{ position:relative; display:grid; place-items:center; min-height:100%; padding:24px }
+
+    .stack{
+      position:absolute; width:min(720px, 92vw); height:min(82vh, 760px);
+      max-width:920px; border-radius:24px; background:#0000; box-shadow:0 30px 120px rgba(0,0,0,.45);
+    }
+    .stack::before, .stack::after{
+      content:""; position:absolute; inset:0; border-radius:inherit; transform:translateY(-18px) scale(.98);
+      background:linear-gradient(180deg, #0f1a2e, #0b1220); opacity:.35; filter:blur(1px)
+    }
+    .stack::after{ transform:translateY(-36px) scale(.96); opacity:.25 }
+
+    .card{
+      position:relative; width:min(560px, 92vw); border-radius:26px; padding:36px 28px 28px; 
+      background:var(--card); backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      box-shadow: 0 18px 80px rgba(3,9,20,.55), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+
+    .brand{ text-align:center; margin-bottom:6px; letter-spacing:2px }
+    .brand .title{ font-weight:800; font-size:clamp(28px, 6vw, 52px); color:#ff4a4a; text-shadow:0 6px 30px rgba(255,74,74,.25) }
+    .brand .subtitle{ margin-top:8px; font-weight:600; font-size:clamp(12px, 2.7vw, 16px); color:#ff8989 }
+
+    /* Logo style */
+    .logo{
+      width:80px;
+      height:80px;
+      border-radius:50%;
+      margin-bottom:12px;
+      box-shadow:0 6px 20px rgba(0,0,0,.4);
+      object-fit:cover;
+    }
+
+    .form{ margin-top:28px }
+    .field{ display:flex; align-items:center; background:rgba(8,13,25,.7); border-radius:16px; padding:8px 14px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.06) }
+    .select{ flex:1; position:relative }
+    select{
+      appearance:none; -webkit-appearance:none; width:100%; border:0; outline:0; background:transparent; color:var(--text);
+      font-size:16px; font-weight:600; padding:12px 40px 12px 4px; cursor:pointer
+    }
+    .chev{ position:absolute; right:8px; top:50%; translate:0 -50%; pointer-events:none; opacity:.8 }
+
+    .actions{ display:grid; gap:14px; margin-top:24px }
+    .btn{
+      border:0; border-radius:14px; padding:14px 18px; font-weight:800; letter-spacing:.4px; font-size:16px; cursor:pointer;
+      background:var(--accent); color:white; box-shadow:0 12px 30px rgba(255,59,59,.35), 0 0 0 1px #ffffff10; transition:.18s ease-in-out;
+    }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 18px 40px rgba(255,59,59,.45) }
+    .btn:active{ transform:translateY(0) scale(.99) }
+
+    .btn.secondary{ background:transparent; color:var(--text); 
+      box-shadow: inset 0 0 0 1.2px rgba(255,255,255,.12), 0 10px 28px rgba(0,0,0,.22);
+    }
+    .btn.secondary:hover{ box-shadow: inset 0 0 0 1.2px rgba(255,255,255,.22), 0 14px 34px rgba(0,0,0,.28) }
+
+    .note{ margin:16px auto 0; text-align:center; color:var(--muted); font-size:14px; max-width:36ch; line-height:1.4 }
+    .copy{ text-align:center; margin-top:16px; color:#a9b4cf; font-weight:600; opacity:.9 }
+
+    .toast{ position:fixed; right:18px; bottom:18px; background:#0d1627; color:#e6eeff; padding:12px 14px; border-radius:12px; 
+      box-shadow:0 12px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06); display:none; }
+
+    @media (min-height:780px){ .wrap{ padding:42px } }
+  </style>
+</head>
+<body>
+  <div class="neon" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="stack" aria-hidden="true"></div>
+    <main class="card" role="region" aria-label="DAFAMODS MT UNBANNED">
+      <header class="brand">
+        <!-- Logo Foto Sendiri -->
+        <img src="https://files.catbox.moe/q2jrog.jpg" alt="jpg" class="jpg">
+        <div class="title">DAFAMODS</div>
+        <div class="subtitle">MT UNBANNED</div>
+      </header>
+
+      <form class="form" id="mtForm" onsubmit="return false;">
+        <label class="field" for="method">
+          <div class="select">
+            <select id="method" required>
+              <option value="" selected disabled>Pilih Metode UNBANNED
+              </option>
+              <option>PERMA BATU V1 (Razor)</option>
+              <option>SPAM TINJAU V1 (Razor)</option>
+              <option>PERMA LUMUT V1 (Razor)</option>
+              <option>PERMA HARD V1 (Razor)</option>
+            </select>
+            <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+
+        <div class="actions">
+          <button class="btn" id="genBtn" type="button">Generate MT</button>
+          <button class="btn secondary" id="tutorBtn" type="button">tutorial Banding  WA-Ori</button>
+        </div>
+      </form>
+
+      <p class="note">MT Razor:saya sudah jelaskan cara banding dan cara unbanned gunakan sebutuh kalian yang penting mt unbanned gw di jual bangsat .</p>
+      <p class="copy">© 2025 DAFAMODS</p>
+    </main>
+  </div>  
+
+  <div class="toast" id="toast">Fitur ini hanya DAFAMODS MT.</div>  
+
+  <script>
+    const toast = document.getElementById('toast');
+    const showToast = (msg)=>{
+      toast.textContent = msg; toast.style.display = 'block';
+      clearTimeout(showToast.t); showToast.t = setTimeout(()=> toast.style.display = 'none', 2500);
+    };
+
+    document.getElementById('permabatu').addEventListener('click', ()=>{
+      const method = document.getElementById('method').value;
+      if(!method){ showToast('Pilih metode dulu.'); return; }
+      const code = btoa(`${method} • ${new Date().toISOString()}`);
+      navigator.clipboard?.writeText(code);
+      showToast('MT (Razor) dicopy ke clipboard.');
+    });
+
+document.getElementById('spamtinjau').addEventListener('click', ()=>{
+      const method = document.getElementById('method').value;
+      if(!method){ showToast('Pilih metode dulu.'); return; }
+      const code = btoa(`${method} • ${new Date().toISOString()}`);
+      navigator.clipboard?.writeText(code);
+      showToast('MT (Razor) dicopy ke clipboard.');
+    });
+    
+document.getElementById('perma-lumut').addEventListener('click', ()=>{
+      const method = document.getElementById('method').value;
+      if(!method){ showToast('Pilih metode dulu.'); return; }
+      const code = btoa(`${method} • ${new Date().toISOString()}`);
+      navigator.clipboard?.writeText(code);
+      showToast('MT (Razor) dicopy ke clipboard.');
+    });
+
+document.getElementById('permahard').addEventListener('click', ()=>{
+      const method = document.getElementById('method').value;
+      if(!method){ showToast('Pilih metode dulu.'); return; }
+      const code = btoa(`${method} • ${new Date().toISOString()}`);
+      navigator.clipboard?.writeText(code);
+      showToast('MT (Razor) dicopy ke clipboard.');
+    });
+
+    document.getElementById('tutorunband').addEventListener('click', ()=>{
+      showToast('Tidak ada tutorial. Ini hanya MT Razor.');
+    });
+  </script>
+</body>
+</html>
